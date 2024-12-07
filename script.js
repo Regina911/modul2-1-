@@ -1,62 +1,87 @@
 1task 
-let car = {
+let auto = {
     manufacturer: "Japan",
     model: "Nissan",
     issueAge: 2000,
     averageSpeed: 100,
-    showInformation: function() {
-      alert(
-        "Manufacturer: " +
-          car.manufacturer +
-          "\nModel: " +
-          car.model +
-          "\nAge of issue: " +
-          car.issueAge +
-          "\nAverage Speed: " +
-          car.averageSpeed +
-          "km/h"
-      )
-    }
 }
-countingTime: function(distance) {
-    return distance / this.averageSpeed;
-  }
 
+console.log(auto);
+function auto1(auto, distance) {
+  let auto1 = distance/auto.averageSpeed;
+  let breaks = Math.floor(auto1/4);
+  let sumTime = auto1 + breaks;
 
-car.showInformation();
-var hours = car.countingTime(600);
-alert("You need " + hours + " hours to get to that distance!");
+  return `${distance}
+  ${sumTime.toFixed(2)}`;
+}
+console.log(auto1(auto,300));
+
 
 2task 
-let fraction = {
-    nominator: 2,
-    denominator: 3,
-    addition: function(nominator, denominator) {
-      let sum = this.nominator / this.denominator + nominator / denominator;
-      alert("Sum of fractions is " + sum);
-    },
-    subtruction: function(nominator, denominator) {
-      let subtr = this.nominator / this.denominator - nominator / denominator;
-      alert(" Subtruction is: " + subtr);
-    },
-    product: function(nominator, denominator) {
-      let product_ =
-        (this.nominator / this.denominator) * (nominator / denominator);
-      alert("Product is " + product_);
-    },
-    division: function(nominator, denominator) {
-      let div = this.nominator / this.denominator / (nominator / denominator);
-      alert("Division of these fractions is " + div);
-    }
-  };
-  
-  var nominator, denominator;
-  nominator = prompt("Enter a nominator: ");
-  denominator = prompt("Enter a denominator: ");
-  fraction.addition(nominator, denominator);
-  fraction.subtruction(nominator, denominator);
-  fraction.division(nominator, denominator);
-  fraction.product(nominator, denominator);
+function createVichislenie(chislitel, znamenatel){
+  return {
+  chislitel: chislitel,
+
+  znamenatel: znamenatel,
+
+};
+
+}
+
+
+
+function ddd(a, b) {
+  return b === 0 ? a : ddd(b, a % b);
+}
+
+
+function reduce(vichislenie) {
+  const commonDivisor = ddd(vichislenie.chislitel, vichislenie.znamenatel);
+  return createVichislenie(vichislenie.numerator / commonDivisor, vichislenie.znamenatel / commonDivisor);
+}
+
+
+function add(vichislenie1, vichislenie2) {
+  const newChislitel = vichislenie1.chislitel * vichislenie2.znamenatel + vichislenie2.chislitel* vichislenie1.znamenatel;
+  const newZnamenatel = vichislenie1.znamenatel * vichislenie2.znamenatel;
+  return reduce(createVichislenie(newChislitel, newZnamenatel));
+}
+
+
+function subtract(vichislenie1, vichislenie2) {
+  const newChislitel = vichislenie1.chislitel * vichislenie2.znamenatel - vichislenie2.chislitel * vichislenie1.znamenatel;
+  const newZnamenatel = vichislenie1.znamenatel * vichislenie2.znamenatel;
+  return reduce(createVichislenie(newChislitel, newZnamenatel));
+}
+
+// Функция для умножения двух дробей
+function multiply(vichislenie1, vichislenie2) {
+  const newChislitel = vichislenie1.chislitel * vichislenie2.chislitel;
+  const newZnamenatel = vichislenie1.znamenatel * vichislenie2.znamenatel;
+  return reduce(createVichislenie(newChislitel, newZnamenatel));
+}
+
+// Функция для деления двух дробей
+function divide(fraction1, fraction2) {
+  const newChislitel = fraction1.numerator * fraction2.denominator;
+  const newZnamenatel = fraction1.denominator * fraction2.numerator;
+  return reduce(createVichislenie(newChislitel, newZnamenatel));
+}
+
+// Функция для отображения дроби в строковом формате
+function toString(vichislenie) {
+  return `${vichislenie.chislitel}/${vichislenie.znamenatel}`;
+}
+
+// Пример использования
+const vichislenie1 = createVichislenie(1, 2); // 1/2
+const vichislenie2 = createVichislenie(3, 4); // 3/4
+
+console.log(`Сложение: ${toString(add(vichislenie1, vichislenie2))}`);        // 10/8 или 5/4
+console.log(`Вычитание: ${toString(subtract(vichislenie1, vichislenie2))}`); // -1/4
+console.log(`Умножение: ${toString(multiply(vichislenie1, vichislenie2))}`); // 3/8
+console.log(`Деление: ${toString(divide(vichislenie1, vichislenie2))}`);     
 
   3task 
   let time = {
